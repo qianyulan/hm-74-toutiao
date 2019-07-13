@@ -42,8 +42,8 @@ export default {
     return {
       // 表单数据对象
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       // 表单验证规则对象
       loginRules: {
@@ -71,9 +71,21 @@ export default {
             )
             .then(res => {
               // res 是 响应对象  包含 后台返回的数据 res.data
-              // console.log(res.data) 去做什么事情？？？
+              console.log(res.data)
+              console.log(res.data.data)// 保存了token信息
               // 1. 跳转到首页
               // TODO 2. 保存用户的信息  用来判断登录的状态
+              // session  基于cookie 适用于前后端域名相同的网页开放
+              // token  基于本地存储 可以在不同域名的前后端使用 是使用了算法进行加密的字符创  而这字符创可以作为唯一的标识  app ios 用的比较多
+              // 而本地存储有三个
+              // cookie  域名相同的前后端开关
+              // sessionStorage   关闭浏览器  会话状态结束
+              // localStorage     关闭浏览器  会话状态还在
+              // sessionStorage.setItem(key,value) 存储数据 value是字符串
+              // sessionStorage.getItem(key)获取数据
+              // sessionStorage.removeItem(key)删除数据
+              // sessionStorage.clear()清除所有数据
+              window.sessionStorage.setItem('hm-74-toutiao', JSON.stringify(res.data.data))
               this.$router.push('/')
             })
             .catch(() => {
